@@ -1,0 +1,26 @@
+{
+  "name": "vocabulary",
+  "version": "1.0.0",
+  "description": "English Vocablulary",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyaremiiy/vocabulary.git"
+  },
+  "keywords": [
+    "english",
+    "ukraine",
+    "vocablulare",
+    "learn",
+    "words"
+  ],
+  "author": "nyaremiiy <nazar.yaremiiy@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nyaremiiy/vocabulary/issues"
+  },
+  "homepage": "https://github.com/nyaremiiy/vocabulary#readme"
+}
