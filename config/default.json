@@ -1,0 +1,6 @@
+{
+  "port": 5000,
+  "mongoUri": "mongodb+srv://n_yaremiy:i7zJseEXy2xpVUI1@cluster0.rj9e0.mongodb.net/?retryWrites=true&w=majority",
+  "pass": "i7zJseEXy2xpVUI1",
+  "secret": "nom12"
+}
