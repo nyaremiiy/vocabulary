@@ -8,12 +8,10 @@ const app = express();
 const PORT = process.env.PORT || config.get('port');
 
 app.use(express.json());
+app.use(express.static('client/build'));
 
-app.get('/', (_, res) => {
-  return res.json({ message: 'success' });
-});
 
-app.post('/register', (req, res) => {
+app.post('/api/registration', (req, res) => {
   const { email, password } = req.body;
 
   log(`Email: ${email}, Password: ${password}`);
@@ -24,9 +22,23 @@ app.post('/register', (req, res) => {
   });
 });
 
+app.get('*', (_, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
+});
+
+
 app.listen(PORT, (err) => {
   if (err) {
     return console.log(err);
   }
   console.log(`The server is running on the port: ${PORT}`);
 });
+
+
+
+
+
+
+
+
+
