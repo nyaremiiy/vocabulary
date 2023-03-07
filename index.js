@@ -16,9 +16,10 @@ app.post('/api/registration', (req, res) => {
 
   log(`Email: ${email}, Password: ${password}`);
 
-  res.json({
+  res.status(201).json({
     email,
     password,
+    token: '123456'
   });
 });
 
