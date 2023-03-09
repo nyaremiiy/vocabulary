@@ -26,9 +26,11 @@ app.post('/api/registration', (req, res) => {
   }
 });
 
-
 app.get('/', (_, res) => {
-  res.sendFile(path.join(__dirname, 'client/build/index.html'));
+  // res.sendFile(path.join(__dirname, 'client/build/index.html'));
+  res.status.json({
+    message: 'success',
+  });
 });
 
 app.listen(PORT, (err) => {
