@@ -26,7 +26,8 @@ app.post('/api/registration', (req, res) => {
   }
 });
 
-app.get('*', (_, res) => {
+
+app.get('/', (_, res) => {
   res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
