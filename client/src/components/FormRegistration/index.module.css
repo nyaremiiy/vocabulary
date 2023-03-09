@@ -85,6 +85,7 @@
 .showPass {
   position: absolute;
   font-weight: 500;
+  color: #242424;
   cursor: pointer;
   font-size: 12px;
   padding: 5px;

@@ -1,119 +1,113 @@
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
 import s from './index.module.css';
 
-const initialData = {
-  email: '',
-  password: '',
-};
-
-const initialErrors = {
-  email: '',
-  password: '',
-};
-
 const FormRegistration = () => {
-  const [data, setData] = useState(initialData);
-  const [inputErrors, setInputErrors] = useState(initialErrors);
-  const [showPassword, setShowPassword] = useState(false);
+  const [dataForm, setDataForm] = useState({
+    email: '',
+    password: '',
+  });
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
-  const checkEmailError = () => {
-    if (data.email.length === 0) {
-      return "Це поле обов'язкове";
-    }
-    return '';
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
 
-  const checkPassowrdError = () => {
-    if (data.password.length === 0) {
-      return "Це поле обов'язкове";
-    }
-    if (data.password.length < 6) {
-      return 'Мінімальна кількість символів 6';
-    }
-    return '';
-  };
+  const handleSubmitForm = (data) => {
+    setDataForm({ ...data });
 
-  const onSubmitForm = async (e) => {
-    e.preventDefault();
-    setInputErrors({
-      email: checkEmailError(),
-      password: checkPassowrdError(),
+    axios
+      .post('/api/registration', {
+        ...data,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    reset({
+      email: '',
+      password: '',
     });
-
-    if (data.email === '' || data.password === '' || data.password.length < 6) {
-      return;
-    }
-
-    const res = await fetch('/api/registration', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+    setDataForm({
+      email: '',
+      password: '',
     });
-
-    
-    alert(res);
-    setData(initialData);
-  };
-
-  const emailHandler = (e) => {
-    checkEmailError();
-    setData({ ...data, email: e.target.value });
-    setInputErrors({
-      ...inputErrors,
-      email: initialErrors.email,
-    });
-  };
-
-  const passwordHandler = (e) => {
-    checkPassowrdError();
-    setData({ ...data, password: e.target.value });
-    setInputErrors({
-      ...inputErrors,
-      password: initialErrors.password,
-    });
-    if (data.password.length === 0) {
-      setShowPassword(false);
-    }
   };
 
   return (
-    <form className={s.form} onSubmit={(e) => onSubmitForm(e)}>
+    <form className={s.form} onSubmit={handleSubmit(handleSubmitForm)}>
       <label className={s.label}>
         <input
-          type='email'
           className={s.input}
+          type='email'
           placeholder='пошта'
-          onChange={(e) => emailHandler(e)}
-          value={data.email}
           autoComplete='email'
+          {...register('email', {
+            required: "Це поле обов'язкове",
+            minLength: {
+              message: 'Мінімальна кількість символів 3',
+              value: 3,
+            },
+            pattern: {
+              value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+              message: 'Невірний формат пошти',
+            },
+            onChange: (e) => {
+              setDataForm({ ...dataForm, email: e.target.value });
+              console.log(dataForm);
+            },
+          })}
         />
-        <div className={s.error}>{inputErrors.email}</div>
+        <div className={s.error}>
+          {errors?.email && (errors?.email?.message || '')}
+        </div>
       </label>
       <label className={s.label}>
         <input
-          type={showPassword ? 'text' : 'password'}
           className={s.input}
+          type={!isShowPassword ? 'password' : 'text'}
           placeholder='пароль'
-          onChange={(e) => passwordHandler(e)}
-          value={data.password}
-          autoComplete='current-password'
+          autoComplete='password'
+          {...register('password', {
+            required: "Це поле обов'язкове",
+            minLength: {
+              message: 'Мінімальна кількість символів 6',
+              value: 6,
+            },
+            onChange: (e) => {
+              setDataForm((prevState) => ({
+                ...prevState,
+                password: e.target.value,
+              }));
+              console.log(dataForm);
+            },
+          })}
         />
-        <div className={s.error}>{inputErrors.password}</div>
-        {data.password.length > 0 ? (
-          showPassword ? (
+        <div className={s.error}>
+          {errors?.password && (errors?.password?.message || '')}
+        </div>
+        {dataForm?.password.length > 0 ? (
+          isShowPassword ? (
             <div
               className={s.showPass}
-              onClick={() => setShowPassword(!showPassword)}
+              onClick={() => setIsShowPassword(!isShowPassword)}
             >
               Приховати
             </div>
           ) : (
             <div
               className={s.showPass}
-              onClick={() => setShowPassword(!showPassword)}
+              onClick={() => setIsShowPassword(!isShowPassword)}
             >
               Показати
             </div>

@@ -1,32 +1,34 @@
-console.log('App started!!!');
 import express from 'express';
 import config from 'config';
+import cors from 'cors';
 const log = console.log;
 
 const app = express();
 
 const PORT = process.env.PORT || config.get('port');
 
+app.use(cors());
 app.use(express.json());
 app.use(express.static('client/build'));
 
-
 app.post('/api/registration', (req, res) => {
-  const { email, password } = req.body;
+  try {
+    log(req.body);
+    const { email, password } = req.body;
 
-  log(`Email: ${email}, Password: ${password}`);
-
-  res.status(201).json({
-    email,
-    password,
-    token: '123456'
-  });
+    res.status(201).json({
+      email,
+      password,
+      token: '123456',
+    });
+  } catch (error) {
+    console.log('Error: ', error);
+  }
 });
 
 app.get('*', (_, res) => {
   res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
-
 
 app.listen(PORT, (err) => {
   if (err) {
@@ -34,12 +36,3 @@ app.listen(PORT, (err) => {
   }
   console.log(`The server is running on the port: ${PORT}`);
 });
-
-
-
-
-
-
-
-
-
