@@ -28,7 +28,7 @@ app.use(express.static('var/task/client/build'));
 // // });
 
 app.get('/', (_, res) => {
-  const ppp = path.join(process.cwd(), 'client/build/index.html');
+  const ppp = path.join('', '/var/task/client/build/index.html');
   res.sendFile(ppp);
   // res.json({
   //   dirname: __dirname,
