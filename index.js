@@ -26,11 +26,11 @@ app.use(express.urlencoded({ extended: false }));
 // //   }
 // // });
 
-app.use(express.static(path.join(__dirname, "./client/build")));
+app.use(express.static(path.join(__dirname, "client/build")));
 
-app.get("*", function (_, res) {
+app.get("/", function (_, res) {
   res.sendFile(
-    path.join(__dirname, "./client/build/index.html"),
+    path.join(__dirname, "client/build/index.html"),
     function (err) {
       if (err) {
         res.status(500).send(err);
@@ -38,6 +38,7 @@ app.get("*", function (_, res) {
     }
   );
 });
+
 app.listen(process.env.PORT || 5000, (err) => {
   if (err) {
     return console.log(err);
