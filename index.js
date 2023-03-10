@@ -30,12 +30,12 @@ app.use(express.static('client/build'));
 app.get('/', (_, res) => {
   const ppp = path.join(process.cwd(), 'client/build/index.html');
   res.sendFile(ppp);
-  res.json({
-    dirname: __dirname,
-    filename: __filename,
-    processCwd: process.cwd(),
-    ppp
-  });
+  // res.json({
+  //   dirname: __dirname,
+  //   filename: __filename,
+  //   processCwd: process.cwd(),
+  //   ppp
+  // });
 });
 
 app.listen(5000, (err) => {
