@@ -26,8 +26,11 @@ app.post('/api/registration', (req, res) => {
   }
 });
 
-app.get('/', (_, res) => {
-  res.sendFile(path.join(__dirname, 'client/build/index.html'));
+// app.get('/', (_, res) => {
+//   res.sendFile(path.join(__dirname, 'client/build/index.html'));
+// });
+app.get("/", (req, res) => {
+  res.send("Express on Vercel");
 });
 
 app.listen(PORT, (err) => {
