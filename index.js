@@ -5,29 +5,32 @@ const log = console.log;
 
 const app = express();
 
-const PORT = process.env.PORT || config.get('port');
+const PORT = config.get('port');
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('client/build'));
+// app.use(express.static('client/build'));
 
-app.post('/api/registration', (req, res) => {
-  try {
-    log(req.body);
-    const { email, password } = req.body;
+// app.post('/api/registration', (req, res) => {
+//   try {
+//     log(req.body);
+//     const { email, password } = req.body;
 
-    res.status(201).json({
-      email,
-      password,
-      token: '123456',
-    });
-  } catch (error) {
-    console.log('Error: ', error);
-  }
-});
+//     res.status(201).json({
+//       email,
+//       password,
+//       token: '123456',
+//     });
+//   } catch (error) {
+//     console.log('Error: ', error);
+//   }
+// });
 
-app.get('/', (_, res) => {
-  res.sendFile(path.join(__dirname, 'client/build/index.html'));
+// app.get('/', (_, res) => {
+//   res.sendFile(path.join(__dirname, 'client/build/index.html'));
+// });
+app.get('/', (req, res) => {
+  res.send('Express on Vercel');
 });
 
 app.listen(PORT, (err) => {
