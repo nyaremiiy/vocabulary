@@ -5,7 +5,7 @@ const config = require('config');
 
 const app = express();
 
-const PORT = config.get('port');
+const PORT = +config.get('port');
 
 // app.use(cors());
 // app.use(express.json());
