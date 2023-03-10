@@ -30,6 +30,10 @@ app.use(express.static('client/build'));
 app.get('/', (_, res) => {
   // res.sendFile(path.join(process.cwd(), 'client/build/index.html'));
   // res.sendFile("client/build/index.html", { root: __dirname });
+  res.json({
+    dirname : __dirname,
+    filename : __filename,
+  });
 });
 
 
