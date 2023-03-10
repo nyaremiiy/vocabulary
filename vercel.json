@@ -7,7 +7,7 @@
       },
       {
           "src": "client/build/**",
-          "use": "/client/build/static"
+          "use": "@vercel/client/build/static"
       }
   ],
   "routes":[
