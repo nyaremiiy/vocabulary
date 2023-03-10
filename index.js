@@ -10,8 +10,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')))
-
+app.use(express.urlencoded({ extended: false }));
 // // app.post('/api/registration', (req, res) => {
 // //   try {
 // //     log(req.body);
@@ -27,10 +26,18 @@ app.use(express.static(path.join(__dirname, 'public')))
 // //   }
 // // });
 
-app.get('/', (_, res) => {
-  res.sendFile('index.html', {root: path.join(__dirname, 'public')});
-});
+app.use(express.static(path.join(__dirname, "./client/build")));
 
+app.get("*", function (_, res) {
+  res.sendFile(
+    path.join(__dirname, "./client/build/index.html"),
+    function (err) {
+      if (err) {
+        res.status(500).send(err);
+      }
+    }
+  );
+});
 app.listen(process.env.PORT || 5000, (err) => {
   if (err) {
     return console.log(err);
