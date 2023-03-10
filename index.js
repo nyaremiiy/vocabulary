@@ -1,10 +1,6 @@
 import express from 'express';
 import path from 'node:path';
 import cors from 'cors';
-import config from 'config';
-
-
-
 
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
@@ -14,11 +10,7 @@ const log = console.log;
 
 const app = express();
 
-log('Port:', config.get('port'))
-
-
-const PORT = process.env.PORT|| config.get('port') || 5000;
-
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
