@@ -9,7 +9,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-// // app.use(express.static('client/build'));
+app.use(express.static('client/build'));
 
 // // app.post('/api/registration', (req, res) => {
 // //   try {
@@ -26,12 +26,10 @@ app.use(express.json());
 // //   }
 // // });
 
-// // app.get('/', (_, res) => {
-// //   res.sendFile(path.join(__dirname, 'client/build/index.html'));
-// // });
-app.get('/', (req, res) => {
-  res.send('Express on Vercel');
+app.get('/', (_, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
+
 
 app.listen(5000, (err) => {
   if (err) {
