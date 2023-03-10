@@ -1,11 +1,11 @@
-// const express = require('express');
-// const config = require('config');
+const express = require('express');
+const config = require('config');
 // const cors = require('cors');
 // const log = console.log;
 
-// const app = express();
+const app = express();
 
-// const PORT = config.get('port');
+const PORT = config.get('port');
 
 // app.use(cors());
 // app.use(express.json());
@@ -29,29 +29,18 @@
 // // app.get('/', (_, res) => {
 // //   res.sendFile(path.join(__dirname, 'client/build/index.html'));
 // // });
-// app.get('/', (req, res) => {
-//   res.send('Express on Vercel');
-// });
-
-// app.listen(PORT, (err) => {
-//   if (err) {
-//     return console.log(err);
-//   }
-//   console.log(`The server is running on the port: ${PORT}`);
-// });
-
-// Add Express
-const express = require('express');
-
-// Initialize Express
-const app = express();
-
-// Create GET request
 app.get('/', (req, res) => {
   res.send('Express on Vercel');
 });
 
-// Initialize server
-app.listen(5000, () => {
-  console.log('Running on port 5000.');
+app.listen(PORT, (err) => {
+  if (err) {
+    return console.log(err);
+  }
+  console.log(`The server is running on the port: ${PORT}`);
 });
+
+
+
+
+
