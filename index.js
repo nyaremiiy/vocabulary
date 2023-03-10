@@ -1,42 +1,41 @@
-const express = require('express');
-const path = require('node:path');
-// const config = require('config');
-const cors = require('cors');
+// const express = require('express');
+// const path = require('node:path');
+// // const config = require('config');
+// const cors = require('cors');
+import express from 'express';
+import path from 'node:path';
+import cors from 'cors';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const log = console.log;
 
 const app = express();
 
-// const PORT = +config.get('port');
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// // app.post('/api/registration', (req, res) => {
-// //   try {
-// //     log(req.body);
-// //     const { email, password } = req.body;
+app.use(express.static(path.join(__dirname, 'client/build')));
 
-// //     res.status(201).json({
-// //       email,
-// //       password,
-// //       token: '123456',
-// //     });
-// //   } catch (error) {
-// //     console.log('Error: ', error);
-// //   }
-// // });
+app.post('/api/registration', (req, res) => {
+  try {
+    log(req.body);
+    const { email, password } = req.body;
 
-app.use(express.static(path.join(__dirname, "client/build")));
+    res.status(201).json({
+      email,
+      password,
+      token: '123456',
+    });
+  } catch (error) {
+    console.log('Error: ', error);
+  }
+});
 
-app.get("/", function (_, res) {
-  res.sendFile(
-    path.join(__dirname, "client/build/index.html"),
-    function (err) {
-      if (err) {
-        res.status(500).send(err);
-      }
-    }
-  );
+app.get('/', function (_, res) {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
 app.listen(process.env.PORT || 5000, (err) => {
