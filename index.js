@@ -1,12 +1,11 @@
 const express = require('express');
-const config = require('config');
+// const config = require('config');
 // const cors = require('cors');
 const log = console.log;
 
 const app = express();
 
-const PORT = +config.get('port');
-log()
+// const PORT = +config.get('port');
 
 // app.use(cors());
 // app.use(express.json());
@@ -38,7 +37,7 @@ app.listen(5000, (err) => {
   if (err) {
     return console.log(err);
   }
-  console.log(`The server is running on the port: ${PORT}`);
+  console.log(`The server is running on the port: ${5000}`);
 });
 
 
