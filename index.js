@@ -1,14 +1,14 @@
 const express = require('express');
 // const config = require('config');
-// const cors = require('cors');
+const cors = require('cors');
 const log = console.log;
 
 const app = express();
 
 // const PORT = +config.get('port');
 
-// app.use(cors());
-// app.use(express.json());
+app.use(cors());
+app.use(express.json());
 // // app.use(express.static('client/build'));
 
 // // app.post('/api/registration', (req, res) => {
