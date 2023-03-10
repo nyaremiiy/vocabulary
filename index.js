@@ -1,11 +1,12 @@
 const express = require('express');
 const config = require('config');
 // const cors = require('cors');
-// const log = console.log;
+const log = console.log;
 
 const app = express();
 
 const PORT = +config.get('port');
+log()
 
 // app.use(cors());
 // app.use(express.json());
@@ -33,7 +34,7 @@ app.get('/', (req, res) => {
   res.send('Express on Vercel');
 });
 
-app.listen(PORT, (err) => {
+app.listen(5000, (err) => {
   if (err) {
     return console.log(err);
   }
