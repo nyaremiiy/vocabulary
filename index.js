@@ -28,14 +28,15 @@ app.use(express.static('client/build'));
 // // });
 
 app.get('/', (_, res) => {
-  // res.sendFile(path.join(process.cwd(), 'client/build/index.html'));
-  // res.sendFile("client/build/index.html", { root: __dirname });
+  const ppp = path.join(process.cwd(), 'client/build/index.html');
+  res.sendFile(ppp);
   res.json({
-    dirname : __dirname,
-    filename : __filename,
+    dirname: __dirname,
+    filename: __filename,
+    processCwd: process.cwd(),
+    ppp
   });
 });
-
 
 app.listen(5000, (err) => {
   if (err) {
@@ -43,8 +44,3 @@ app.listen(5000, (err) => {
   }
   console.log(`The server is running on the port: ${5000}`);
 });
-
-
-
-
-
