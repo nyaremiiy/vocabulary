@@ -1,6 +1,6 @@
-import express from 'express';
-import config from 'config';
-import cors from 'cors';
+const express = require('express');
+const config = require('config');
+const cors = require('cors');
 const log = console.log;
 
 const app = express();
@@ -26,11 +26,8 @@ app.post('/api/registration', (req, res) => {
   }
 });
 
-// app.get('/', (_, res) => {
-//   res.sendFile(path.join(__dirname, 'client/build/index.html'));
-// });
-app.get("/", (req, res) => {
-  res.send("Express on Vercel");
+app.get('/', (_, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
 app.listen(PORT, (err) => {
